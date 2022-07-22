@@ -23,7 +23,13 @@ logger.setLevel(logging.INFO)
 
 @click.command()
 @click.option("--interval", default=30, help="Interval to report to MQTT")
-def main(interval):
+@click.option(
+    "--quiet", is_flag=True, default=False, help="Do not log INFO messages. Helps preserve write cycles on SD cards."
+)
+def main(interval, quiet):
+    if quiet:
+        logger.setLevel(logging.WARNING)
+
     logger.info("CO2 monitor initializing")
     mon = co2.CO2monitor(bypass_decrypt=True)
     logger.info("Initialized CO2 monitor %s", mon.info)
