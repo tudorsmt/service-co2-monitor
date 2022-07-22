@@ -28,6 +28,7 @@ logger.setLevel(logging.INFO)
 )
 def main(interval, quiet):
     if quiet:
+        logger.warning("Quiet mode set, no usual logs will be shown!")
         logger.setLevel(logging.WARNING)
 
     logger.info("CO2 monitor initializing")
