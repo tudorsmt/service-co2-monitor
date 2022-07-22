@@ -32,12 +32,15 @@ def main(interval):
     client.on_connect = on_connect
     client.on_publish = on_publish
     client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
-    client.connect(MQTT_SERVER, 1883, 60)
 
     while True:
         logger.info("Reading data")
         timestamp, co2_ppm, temperature = mon.read_data()
         logger.info("Read Data: CO2 PPM %s, Temperature: %d.02", co2_ppm, temperature)
+        if not client.is_connected():
+            logger.info("Client is not connected, connecting to server %s", MQTT_SERVER)
+            client.connect(MQTT_SERVER, 1883, 60)
+        logger.info()
         client.publish(
             MQTT_TOPIC,
             json.dumps(
