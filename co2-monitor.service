@@ -7,7 +7,7 @@ Type=simple
 # Another Type: forking
 User=tudor
 WorkingDirectory=PATH_TO_THE_INSTALL
-ExecStart=PATH_TO_THE_INSTALL/start-co2-monitor.py --interval 30
+ExecStart=PATH_TO_THE_INSTALL/start-co2-monitor.py --interval 30 --quiet
 # Other restart options: always, on-abort, etc
 Restart=always
 
