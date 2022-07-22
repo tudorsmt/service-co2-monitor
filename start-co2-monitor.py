@@ -46,7 +46,6 @@ def main(interval, quiet):
         if not client.is_connected():
             logger.info("Client is not connected, connecting to server %s", MQTT_SERVER)
             client.connect(MQTT_SERVER, 1883, 60)
-        logger.info()
         client.publish(
             MQTT_TOPIC,
             json.dumps(
